@@ -94,4 +94,16 @@ export class PostPage {
         cy.get('p[data-koenig-dnd-droppable="true"]').first().clear();
         cy.get('[data-test-editor-title-input=""]').first().clear();
     }
+
+    static unpublishPost() {
+        return cy.get('[data-test-button="update-flow"]').first().click({ force: true });
+    }
+
+    static unpublishPostFinal() {
+        return cy.get('[data-test-button="revert-to-draft"]').first().click({ force: true });
+    }
+
+    static postAsDraft() {
+        return cy.get('span.draft').first().should('include.text', 'Draft');
+    }
 }
