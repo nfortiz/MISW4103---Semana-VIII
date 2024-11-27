@@ -32,7 +32,7 @@ describe("Escenarios E0001 - E0003", function () {
     });
   });
 
-  it("E0001 - Unpublish de post previamente creado", function () {
+  it("E0008 - Unpublish de post previamente creado", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
