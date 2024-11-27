@@ -80,4 +80,8 @@ export class Settings {
     .contains('Reactivate')
     .click({ force: true });
   }
+
+  static editLetterName(name) {
+    return cy.get('[placeholder="Weekly Roundup"]').clear().type(name);
+  }
 }
