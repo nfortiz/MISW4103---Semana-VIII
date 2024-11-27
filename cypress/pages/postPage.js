@@ -106,4 +106,25 @@ export class PostPage {
     static postAsDraft() {
         return cy.get('span.draft').first().should('include.text', 'Draft');
     }
+
+    static schedulePost() {
+        return cy.get('[data-test-nav-custom="posts-Scheduled"]').first().click({ force: true });
+    }
+
+    static menuPostSchedule() {
+        return cy.get('[data-test-psm-trigger=""]').first().click({ force: true });
+    }
+
+    static writeHour(hourAtras) {
+        //Hora de sistema
+        let actual = new Date();
+        actual.setHours(actual.getHours() - hourAtras);
+
+        //Mostrar la nueva hora
+        let hora = actual.getHours();
+        let minutos = actual.getMinutes();
+        let horaFinal = hora + ":" + minutos;
+        
+        return cy.get('.gh-date-time-picker-time ').first().clear().type(horaFinal);
+    }
 }
