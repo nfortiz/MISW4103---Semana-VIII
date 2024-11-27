@@ -66,4 +66,18 @@ export class Settings {
   static validateArchiveMessage() {
     return cy.get('[data-testid="toast-success"]').first().should('be.visible');
   }
+
+  static clickReactive() {
+    cy.get('.mb-5.mt-10')
+    .find('span')
+    .contains('Reactivate newsletter')
+    .click({ force: true });
+  }
+
+  static clickReactivateModal() {
+    cy.get('[data-testid="confirmation-modal"]')
+    .find('span')
+    .contains('Reactivate')
+    .click({ force: true });
+  }
 }

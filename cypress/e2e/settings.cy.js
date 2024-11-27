@@ -110,4 +110,59 @@ describe("Escenarios E0006 - E0008", function () {
     //Then veo mensaje de confirmacion
     Settings.validateArchiveMessage();
   });
+
+  it("E0008 - Reactivar una newsletter previamente creada", function () {
+    //Given que voy a los settings
+    PrincipalPage.clickSettings();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And doy click en newsletters
+    Settings.clickNewsletters();
+
+    //And doy click add newsletter
+    Settings.addNewsLetter();
+    cy.screenshot("ss");
+
+    //And añado nombre de newsletter
+    let name = faker.lorem.word();
+    Settings.addNewsLetterName(name);
+    cy.screenshot("ss");
+
+    //And doy click en create
+    Settings.clickCreate();
+
+    //And le doy click en save
+    Settings.clickSave();
+    cy.wait(1000);
+    cy.screenshot("ss");
+
+    //And doy click en cancel
+    Settings.clickCancel();
+    cy.wait(1000);
+
+    //And entro a la newsletter
+    Settings.enterNewsLetter(name);
+    cy.wait(1000);
+    cy.screenshot("ss");
+    
+    //And doy click en archive
+    Settings.clickArchive();
+    cy.screenshot("ss");
+
+    //And doy click en archive del modal
+    Settings.clickArchiveModal();
+    cy.wait(1000);
+
+    //And doy click en re-activar
+    Settings.clickReactive();
+    cy.screenshot("ss");
+
+    //When doy click en re-activar del modal
+    Settings.clickReactivateModal();
+    cy.wait(1000);
+
+    //Then veo mensaje de confirmacion
+    Settings.validateArchiveMessage();
+  });
 });
