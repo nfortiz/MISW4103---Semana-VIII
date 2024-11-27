@@ -187,6 +187,14 @@ static getListPages() {
     return cy.get('a.post-view-link');
   }
 
+  static getCloseCodeInjectionModal() {
+    return cy.get('button[data-test-button="close-psm-subview"]')
+  }
+
+  static getCodeInjectionButton() {
+    return cy.get('button[data-test-button="codeinjection"]')
+  }
+
   static doRightClickPageItem(pageTitle) {
     return cy
     .contains(pageTitle)

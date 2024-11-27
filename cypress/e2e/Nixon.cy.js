@@ -64,15 +64,23 @@ describe('Feature: Pruebas semana 8', () => {
         cy.wait(500);
         
         //And agrega code al header de la page
-        cy.get('button[data-test-button="codeinjection"]').click();
-        cy.get('pre[role="presentation"]').type('hello');
-        cy.wait(5000)
-
+        PagesPage.getCodeInjectionButton().click();
+        const textToBeInjected = faker.lorem.sentence(3);
+        const idOfCodeInjected = "text-injected-cypress";
+        let codeToBeInjected = `<p id="${idOfCodeInjected}">${textToBeInjected}</p>`
+        cy.get('pre[role="presentation"]').first().type(codeToBeInjected);
+        
+        PagesPage.getCloseCodeInjectionModal().click();
+        cy.wait(1000)
         // Then el link de visitar Page debe contener la nueva url
         PagesPage.getPageURLLink()
             .should('have.attr', 'target', '_blank')
             .should('have.attr', 'rel', 'noopener noreferrer')
-            .should('have.attr', 'href') ;
+            .should('have.attr', 'href').then((href) => {
+                cy.visit(href);
+                cy.wait(500);
+                cy.get(`#${idOfCodeInjected}`).should('contain', textToBeInjected)
+              });
 
         cy.wait(500);
 
