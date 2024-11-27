@@ -175,6 +175,18 @@ static getListPages() {
     return cy.get('ul[role="listbox"]')
   }
 
+  static getPageURLInput() {
+    return cy.get("input#url");
+  }
+
+  static getPageLabelForURL() {
+    return cy.get('label[for="url"]').first();
+  }
+
+  static getPageURLLink(){
+    return cy.get('a.post-view-link');
+  }
+
   static doRightClickPageItem(pageTitle) {
     return cy
     .contains(pageTitle)
