@@ -13,7 +13,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   }
 });
 
-describe("Escenarios E0001 - E0003", function () {
+describe("Escenarios E0001 - E0002", function () {
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -144,7 +144,7 @@ describe("Escenarios E0001 - E0003", function () {
   });
 });
 
-describe("Escenarios E0006 - E0008", function () {
+describe("Escenarios E0003 - E0005", function () {
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost
@@ -158,7 +158,7 @@ describe("Escenarios E0006 - E0008", function () {
     });
   });
 
-  it("E0006 - Eliminar un post que previamente se Unpublish", function () {
+  it("E0003 - Eliminar un post que previamente se Unpublish", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -232,7 +232,7 @@ describe("Escenarios E0006 - E0008", function () {
     cy.screenshot("ss");
   });
 
-  it("E0007 - Unpublish de post previamente creado y se vuelve a publicar", function () {
+  it("E0004 - Unpublish de post previamente creado y se vuelve a publicar", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
@@ -316,7 +316,7 @@ describe("Escenarios E0006 - E0008", function () {
     cy.screenshot("ss");
   });
 
-  it("E0008 - Unpublish de post previamente creado", function () {
+  it("E0005 - Unpublish de post previamente creado", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
