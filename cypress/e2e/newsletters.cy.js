@@ -49,6 +49,7 @@ describe("Escenarios E0007 - E00010", function () {
 
     //And doy click en create
     NewsLetters.clickCreate();
+    cy.screenshot("ss");
 
     //And le doy click en save
     NewsLetters.clickSave();
@@ -84,6 +85,7 @@ describe("Escenarios E0007 - E00010", function () {
 
     //And doy click en create
     NewsLetters.clickCreate();
+    cy.screenshot("ss");
 
     //And le doy click en save
     NewsLetters.clickSave();
@@ -131,6 +133,7 @@ describe("Escenarios E0007 - E00010", function () {
 
     //And doy click en create
     NewsLetters.clickCreate();
+    cy.screenshot("ss");
 
     //And le doy click en save
     NewsLetters.clickSave();
@@ -186,6 +189,7 @@ describe("Escenarios E0007 - E00010", function () {
 
     //And doy click en create
     NewsLetters.clickCreate();
+    cy.screenshot("ss");
 
     //And le doy click en save
     NewsLetters.clickSave();

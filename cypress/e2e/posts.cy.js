@@ -225,7 +225,7 @@ describe("Escenarios E0003 - E0004", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = dataPool[2].tituloPost;
+    let titulo = dataPool[3].tituloPost;
     PostPage.writeTitle(titulo);
     cy.screenshot("ss");
 
@@ -297,7 +297,7 @@ describe("Escenarios E0005 - E0006", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = dataPool[2].tituloPost;
+    let titulo = dataPool[4].tituloPost;
     PostPage.writeTitle(titulo);
     cy.screenshot("ss");
 
@@ -371,7 +371,7 @@ describe("Escenarios E0005 - E0006", function () {
     PostPage.creationPostPage().should("have.value", "");
 
     //And escribe el titulo del post
-    let titulo = dataPool[4].tituloPost;
+    let titulo = dataPool[5].tituloPost;
     PostPage.writeTitle(titulo);
     cy.screenshot("ss");
 
