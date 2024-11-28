@@ -13,7 +13,7 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   }
 });
 
-describe("Escenarios E0006 - E0009", function () {
+describe("Escenarios E0007 - E00010", function () {
   let randomRow;
 
   beforeEach(() => {
@@ -29,7 +29,7 @@ describe("Escenarios E0006 - E0009", function () {
     });
   });
 
-  it("E0006 - Crear newsletter", function () {
+  it("E0007 - Crear newsletter", function () {
     //Given que voy a los NewsLetters
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -64,7 +64,7 @@ describe("Escenarios E0006 - E0009", function () {
     cy.screenshot("ss");
   });
 
-  it("E0007 - Archivar newsletter previamente creada", function () {
+  it("E0008 - Archivar newsletter previamente creada", function () {
     //Given que voy a los NewsLetters
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -111,7 +111,7 @@ describe("Escenarios E0006 - E0009", function () {
     NewsLetters.validateArchiveMessage();
   });
 
-  it("E0008 - Reactivar una newsletter previamente creada", function () {
+  it("E0009 - Reactivar una newsletter previamente creada", function () {
     //Given que voy a los NewsLetters
     PrincipalPage.clickSettings();
     cy.wait(1000);
@@ -166,7 +166,7 @@ describe("Escenarios E0006 - E0009", function () {
     NewsLetters.validateArchiveMessage();
   });
 
-  it("E0009 - Editar titulo de un newsletter previamente creada", function () {
+  it("E00010 - Editar titulo de un newsletter previamente creada", function () {
     //Given que voy a los NewsLetters
     PrincipalPage.clickSettings();
     cy.wait(1000);

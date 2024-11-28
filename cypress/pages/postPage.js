@@ -127,4 +127,28 @@ export class PostPage {
         
         return cy.get('.gh-date-time-picker-time ').first().clear().type(horaFinal);
     }
+
+    static featurePost() {
+        return cy.get('[data-test-button="feature"]').first().click({ force: true });
+    }
+
+    static validateFeaturePost() {
+        return cy.get('.gh-featured-post').first().should('be.visible');
+    }
+
+    static clickChangeAccess() {
+        return cy.get('[data-test-button="change-access"]').first().click({ force: true });
+    }
+
+    static changeAccess() {
+        return cy.get('[data-test-select="post-visibility"]').select('Members only');
+    }
+
+    static saveChangeAccess() {
+        return cy.get('[data-test-button="confirm"]').first().click({ force: true });
+    }
+
+    static validateChangeAccess() {
+        return cy.get('[data-test-text="notification-content"]').first().should('be.visible');
+    }
 }
