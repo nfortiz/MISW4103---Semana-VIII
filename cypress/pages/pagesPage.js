@@ -78,6 +78,10 @@ export class PagesPage {
     cy.get(CONTENT.pageContentInput).first().type(content);
   }
 
+  static getTextAreaForPageContent() {
+    return cy.get(CONTENT.pageContentInput).first();
+  }
+
   static clearPageTitle() {
     cy.get(CONTENT.pageTitleInput).first().clear();
   }

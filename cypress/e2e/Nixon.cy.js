@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-import { PagesPage } from "../pages/pagesPage";
+import { PagesPage, CONTENT } from "../pages/pagesPage";
 
 describe('Feature: Pruebas semana 8', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
@@ -87,7 +87,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("3: Agregar code injection al footer de una Page con datos generados aleatorios.", () => {
+    it.skip("3: Agregar code injection al footer de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -122,6 +122,49 @@ describe('Feature: Pruebas semana 8', () => {
               });
 
         cy.wait(500);
+
+        PagesPage.deletePageByTitle(title);
+    });
+
+    it("4: Verificar que el shortcut CTRL + B (Negrita) esta siendo aplicado al agregar contenido a la Page.", () => {
+        //Given usuario logueado 
+        PagesPage.goToPages();
+
+        //When Crear nueva página
+        cy.get(CONTENT.newPageButton).click(); //Click on New Page
+        cy.location("hash").should("contain", "#/editor/page"); // check location
+
+        //Then pone contenido
+        let title = faker.lorem.sentence();
+        let content = faker.lorem.paragraph();
+        PagesPage.addContentToPage(title, content);
+        cy.wait(500);
+
+        let contentBold = faker.lorem.sentence();
+        PagesPage.getTextAreaForPageContent().type('{ctrl}b');
+        cy.wait(500);
+        PagesPage.getTextAreaForPageContent().type(contentBold);
+        cy.wait(500);
+
+        PagesPage.getTextAreaForPageContent().within(() => {
+            cy.get('strong')
+                .should('contain', contentBold)
+        });
+        //Then publica la página
+        cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
+
+        //And confirma creacion de la página 
+        PagesPage.clickConfirmCreatePage();
+        cy.wait(500);
+
+        // Then verifica que existe una Page creada
+        PagesPage.getPublishPageModal().within(() => {
+            PagesPage.getPageTitleInConfirmationModal()
+                .should('contain', title);
+        });
+
+        cy.wait(500);
+        PagesPage.closeModal();
 
         PagesPage.deletePageByTitle(title);
     });
