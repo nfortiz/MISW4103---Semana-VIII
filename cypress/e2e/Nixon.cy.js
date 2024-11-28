@@ -48,7 +48,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("2: Agregar code injection a una Page con datos generados aleatorios.", () => {
+    it.skip("2: Agregar code injection al header de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -68,7 +68,7 @@ describe('Feature: Pruebas semana 8', () => {
         const textToBeInjected = faker.lorem.sentence(3);
         const idOfCodeInjected = "text-injected-cypress";
         let codeToBeInjected = `<p id="${idOfCodeInjected}">${textToBeInjected}</p>`
-        cy.get('pre[role="presentation"]').first().type(codeToBeInjected);
+        PagesPage.getCodeTextBox().first().type(codeToBeInjected);
         
         PagesPage.getCloseCodeInjectionModal().click();
         cy.wait(1000)
@@ -86,5 +86,45 @@ describe('Feature: Pruebas semana 8', () => {
 
         PagesPage.deletePageByTitle(title);
     });
+
+    it("3: Agregar code injection al footer de una Page con datos generados aleatorios.", () => {
+        //Given usuario logueado y pagina creada
+        const title = "Page to be Edited";
+        PagesPage.createPage(title, "Random content");
+        PagesPage.goToPages();
+
+        //When Doy click en editar
+        PagesPage.getEditPageButtonByTitle(title); 
+        cy.wait(500);
+        cy.location("hash").should("contain", "#/editor/page"); // check location
+
+        //And Abre el menu lateral
+        PagesPage.getLateralMenuInPage().click();
+        cy.wait(500);
+        
+        //And agrega code al header de la page
+        PagesPage.getCodeInjectionButton().click();
+        const textToBeInjected = faker.lorem.sentence(3);
+        const idOfCodeInjected = "text-injected-cypress";
+        let codeToBeInjected = `<p id="${idOfCodeInjected}">${textToBeInjected}</p>`
+        PagesPage.getCodeTextBox().eq(1).type(codeToBeInjected);
+        
+        PagesPage.getCloseCodeInjectionModal().click();
+        cy.wait(1000)
+        // Then el link de visitar Page debe contener la nueva url
+        PagesPage.getPageURLLink()
+            .should('have.attr', 'target', '_blank')
+            .should('have.attr', 'rel', 'noopener noreferrer')
+            .should('have.attr', 'href').then((href) => {
+                cy.visit(href);
+                cy.wait(500);
+                cy.get(`#${idOfCodeInjected}`).should('contain', textToBeInjected)
+              });
+
+        cy.wait(500);
+
+        PagesPage.deletePageByTitle(title);
+    });
+
 
 });

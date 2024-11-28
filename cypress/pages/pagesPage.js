@@ -195,6 +195,10 @@ static getListPages() {
     return cy.get('button[data-test-button="codeinjection"]')
   }
 
+  static getCodeTextBox() {
+    return cy.get('pre[role="presentation"]')
+  }
+
   static doRightClickPageItem(pageTitle) {
     return cy
     .contains(pageTitle)
