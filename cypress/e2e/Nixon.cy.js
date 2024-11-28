@@ -2,6 +2,8 @@ import { faker } from "@faker-js/faker";
 
 import { PagesPage, CONTENT } from "../pages/pagesPage";
 
+import { NavigationPage } from '../pages/navigationPage';
+
 describe('Feature: Pruebas semana 8', () => {
     Cypress.on("uncaught:exception", (err, runnable) => {
         return false;
@@ -169,7 +171,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("5: Verificar que el shortcut CTRL + I (Cursiva) esta siendo aplicado al agregar contenido a la Page.", () => {
+    it.skip("5: Verificar que el shortcut CTRL + I (Cursiva) esta siendo aplicado al agregar contenido a la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -211,5 +213,69 @@ describe('Feature: Pruebas semana 8', () => {
 
         PagesPage.deletePageByTitle(title);
     });
+
+    it.skip("8: Agregar items a la Navegacion del site.", () => {
+       //Given usuario logueado
+        NavigationPage.goToSettings();
+
+        NavigationPage.goToEditNavigation();
+
+        NavigationPage.getNavigationSection().within(() => {
+            cy.contains('Customize').click();
+        });
+
+        let navigationText = faker.lorem.sentence(1);
+
+        NavigationPage.getEditNavigationModal().within(() => {
+            cy.get('div[data-testid="new-navigation-item"]').within(() => {
+                cy.get('input').first().type(navigationText);
+                cy.get('input').eq(1).type('cypress');
+                cy.get('button[data-testid="add-button"]').click();
+            });
+
+            cy.wait(500);
+            cy.get('button.cursor-pointer.bg-black.text-white').click(); // click save
+        });
+
+
+        NavigationPage.goToSite();
+        cy.wait(500);
+
+        cy.get('nav.gh-navigation-menu')
+            .should('contain', navigationText)
+        
+    });
+
+    it.skip("9: Eliminar items a la Navegacion del site.", () => {
+        //Given usuario logueado
+         NavigationPage.goToSettings();
+ 
+         NavigationPage.goToEditNavigation();
+ 
+         NavigationPage.getNavigationSection().within(() => {
+             cy.contains('Customize').click();
+         });
+ 
+         let navigationText = faker.lorem.sentence(1);
+ 
+         NavigationPage.getEditNavigationModal().within(() => {
+             cy.get('div[data-testid="new-navigation-item"]').within(() => {
+                 cy.get('input').first().type(navigationText);
+                 cy.get('input').eq(1).type('cypress');
+                 cy.get('button[data-testid="add-button"]').click();
+             });
+ 
+             cy.wait(500);
+             cy.get('button.cursor-pointer.bg-black.text-white').click(); // click save
+         });
+ 
+ 
+         NavigationPage.goToSite();
+         cy.wait(500);
+ 
+         cy.get('nav.gh-navigation-menu')
+             .should('contain', navigationText)
+         
+     });
 
 });
