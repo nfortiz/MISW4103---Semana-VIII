@@ -1,4 +1,4 @@
-export class Settings {
+export class NewsLetters {
   static clickNewsletters() {
     return cy.get('#newsletters').first().click({ force: true });
   }
