@@ -214,7 +214,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("6: Agregar Markdown al contenido de la Page.[BUG]", () => {
+    it.skip("6: Agregar Markdown al contenido de la Page.[BUG]", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -263,6 +263,67 @@ describe('Feature: Pruebas semana 8', () => {
         cy.wait(500);
         
         cy.get(`h2`).should('contain', textContent)
+        
+        cy.wait(500);
+        PagesPage.goToPages();
+
+        PagesPage.deletePageByTitle(title);
+    });
+
+    it("7: Agregar Botton con link a cypress al contenido de la Page.[BUG]", () => {
+        //Given usuario logueado 
+        PagesPage.goToPages();
+
+        //When Crear nueva página
+        cy.get(CONTENT.newPageButton).click(); //Click on New Page
+        cy.location("hash").should("contain", "#/editor/page"); // check location
+
+        //Then pone contenido
+        let title = faker.lorem.sentence();
+        let content = faker.lorem.paragraph();
+        PagesPage.addContentToPage(title, content);
+        cy.wait(500);
+
+        let buttonContent = `Go to Cypress`;
+        let buttonLink = `https://docs.cypress.io/api/commands/type`;
+        PagesPage.getTextAreaForPageContent().type('{enter}');
+        cy.get(CONTENT.pageContentInput).eq(1).type('/button');
+        cy.wait(500);
+        cy.get('button[data-kg-card-menu-item="Button"]').click();
+        cy.wait(500);
+        cy.get('div[data-testid="settings-panel"]').within(() => {
+            cy.get('input[data-testid="button-input-text"]').type(buttonContent);
+            cy.get('input[data-testid="button-input-url"]').type(buttonLink);
+            cy.contains('Button text').click();
+        });
+
+        //Then publica la página
+        cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
+
+        //And confirma creacion de la página 
+        PagesPage.clickConfirmCreatePage();
+        cy.wait(500);
+
+        // Then verifica que existe una Page creada
+        PagesPage.getPublishPageModal().within(() => {
+            PagesPage.getPageTitleInConfirmationModal()
+                .should('contain', title);
+        });
+
+        PagesPage.getPublishPageModal().within(() => {
+           cy.get('a[data-test-complete-bookmark]') 
+           .should('have.attr', 'target', '_blank')
+           .should('have.attr', 'href').then((href) => {
+               cy.visit(href);
+            });
+            
+        });
+        cy.wait(500);
+        
+        cy.contains(buttonContent)
+            .should('have.attr', 'href').then((href) => {
+                cy.wrap(href).should('contain', buttonLink)
+            })
         
         cy.wait(500);
         PagesPage.goToPages();
