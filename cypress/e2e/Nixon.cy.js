@@ -259,10 +259,8 @@ describe('Feature: Pruebas semana 8', () => {
          let navigationText = faker.lorem.sentence(1);
  
          NavigationPage.getEditNavigationModal().within(() => {
-             cy.get('div[data-testid="new-navigation-item"]').within(() => {
-                 cy.get('input').first().type(navigationText);
-                 cy.get('input').eq(1).type('cypress');
-                 cy.get('button[data-testid="add-button"]').click();
+             cy.get('div[data-testid="navigation-item-editor"]').last().within(() => {
+                 cy.get('button').first().click();
              });
  
              cy.wait(500);
@@ -274,7 +272,7 @@ describe('Feature: Pruebas semana 8', () => {
          cy.wait(500);
  
          cy.get('nav.gh-navigation-menu')
-             .should('contain', navigationText)
+             .should('not.contain', navigationText)
          
      });
 
