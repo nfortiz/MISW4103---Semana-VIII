@@ -384,7 +384,60 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("9: Agregar items a la Navegacion del site.", () => {
+    it("9: Agregar Youtube video con link a cypress al contenido de la Page.", () => {
+        //Given usuario logueado 
+        PagesPage.goToPages();
+
+        //When Crear nueva página
+        cy.get(CONTENT.newPageButton).click(); //Click on New Page
+        cy.location("hash").should("contain", "#/editor/page"); // check location
+
+        //Then pone contenido
+        let title = faker.lorem.sentence();
+        let content = faker.lorem.paragraph();
+        PagesPage.addContentToPage(title, content);
+        cy.wait(500);
+
+        let bmLink = `https://www.youtube.com/watch?v=OUyzmi4F5Rc`;
+        PagesPage.getTextAreaForPageContent().type('{enter}');
+        cy.get(CONTENT.pageContentInput).eq(1).type(`/youtube ${bmLink} {enter}`);
+        cy.wait(500);
+
+        //Then publica la página
+        cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
+
+        //And confirma creacion de la página 
+        PagesPage.clickConfirmCreatePage();
+        cy.wait(500);
+
+        // Then verifica que existe una Page creada
+        PagesPage.getPublishPageModal().within(() => {
+            PagesPage.getPageTitleInConfirmationModal()
+                .should('contain', title);
+        });
+
+        PagesPage.getPublishPageModal().within(() => {
+           cy.get('a[data-test-complete-bookmark]') 
+           .should('have.attr', 'target', '_blank')
+           .should('have.attr', 'href').then((href) => {
+               cy.visit(href);
+            });
+            
+        });
+        cy.wait(500);
+        
+        cy.get('figure')
+            .should('have.attr', 'src').then((href) => {
+                cy.wrap(href).should('contain', bmLink)
+            })
+        
+        cy.wait(500);
+        PagesPage.goToPages();
+
+        PagesPage.deletePageByTitle(title);
+    });
+
+    it("10: Agregar items a la Navegacion del site.", () => {
        //Given usuario logueado
         NavigationPage.goToSettings();
 
@@ -416,7 +469,7 @@ describe('Feature: Pruebas semana 8', () => {
         
     });
 
-    it("10: Eliminar items a la Navegacion del site.", () => {
+    it("11: Eliminar items a la Navegacion del site.", () => {
         //Given usuario logueado
          NavigationPage.goToSettings();
  
@@ -446,7 +499,7 @@ describe('Feature: Pruebas semana 8', () => {
          
     });  
 
-    it.skip("11: Agregar cover image al contenido de la Page.", () => {
+    it.skip("12: Agregar cover image al contenido de la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
