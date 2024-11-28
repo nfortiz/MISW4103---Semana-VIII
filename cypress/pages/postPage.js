@@ -121,8 +121,8 @@ export class PostPage {
         actual.setHours(actual.getHours() - hourAtras);
 
         //Mostrar la nueva hora
-        let hora = actual.getHours();
-        let minutos = actual.getMinutes();
+        let hora = String(actual.getHours()).padStart(2, "0");
+        let minutos = String(actual.getMinutes()).padStart(2, "0");
         let horaFinal = hora + ":" + minutos;
         
         return cy.get('.gh-date-time-picker-time ').first().clear().type(horaFinal);

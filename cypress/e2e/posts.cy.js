@@ -306,6 +306,7 @@ describe("Escenarios E0003 - E0005", function () {
 
     //And le da click en el boton Publish post, right now
     PostPage.publishPostButtonFinal();
+    cy.screenshot("ss");
 
     //When cierre el modal de confirmación de publicación
     PostPage.closePublishModal();
