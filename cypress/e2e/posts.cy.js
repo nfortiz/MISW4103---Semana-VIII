@@ -232,7 +232,7 @@ describe("Escenarios E0003 - E0005", function () {
     cy.screenshot("ss");
   });
 
-  it("E0004 - Unpublish de post previamente creado y se vuelve a publicar", function () {
+  it("E0004 - Publicar un post que fue previamnete Unpublish", function () {
     //Given que voy a la sección de posts
     PrincipalPage.clickPosts();
     cy.wait(1000);
