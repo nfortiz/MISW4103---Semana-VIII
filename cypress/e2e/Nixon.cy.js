@@ -13,7 +13,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.doLogIn();
     });
 
-    it("1: Editar URL de una Page con datos generados aleatorios.", () => {
+    it("E0031: Editar URL de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -50,7 +50,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("2: Agregar code injection al header de una Page con datos generados aleatorios.", () => {
+    it("E0032: Agregar code injection al header de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -89,7 +89,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("3: Agregar code injection al footer de una Page con datos generados aleatorios.", () => {
+    it("E0033: Agregar code injection al footer de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -128,7 +128,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("4: Verificar que el shortcut CTRL + B (Negrita) esta siendo aplicado al agregar contenido a la Page.", () => {
+    it("E0034: Verificar que el shortcut CTRL + B (Negrita) esta siendo aplicado al agregar contenido a la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -171,7 +171,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("5: Verificar que el shortcut CTRL + I (Cursiva) esta siendo aplicado al agregar contenido a la Page.", () => {
+    it("E0035: Verificar que el shortcut CTRL + I (Cursiva) esta siendo aplicado al agregar contenido a la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -214,7 +214,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("6: Agregar Markdown al contenido de la Page.[BUG]", () => {
+    it("E0036: Agregar Markdown al contenido de la Page.[BUG]", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -270,7 +270,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("7: Agregar Botton con link a cypress al contenido de la Page.", () => {
+    it("E0037: Agregar Botton con link a cypress al contenido de la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -331,7 +331,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("8: Agregar Bookmark con link a cypress al contenido de la Page.", () => {
+    it("E0038: Agregar Bookmark con link a cypress al contenido de la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -384,7 +384,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("9: Agregar Youtube video con link a cypress al contenido de la Page.", () => {
+    it("E0039: Agregar Youtube video con link a cypress al contenido de la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -437,7 +437,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("10: Agregar items a la Navegacion del site.", () => {
+    it("E0040: Agregar items a la Navegacion del site.", () => {
        //Given usuario logueado
         NavigationPage.goToSettings();
 
@@ -469,7 +469,7 @@ describe('Feature: Pruebas semana 8', () => {
         
     });
 
-    it("11: Eliminar items a la Navegacion del site.", () => {
+    it("E0041: Eliminar items a la Navegacion del site.", () => {
         //Given usuario logueado
          NavigationPage.goToSettings();
  
@@ -499,57 +499,36 @@ describe('Feature: Pruebas semana 8', () => {
          
     });  
 
-    it.skip("12: Agregar cover image al contenido de la Page.", () => {
-        //Given usuario logueado 
-        PagesPage.goToPages();
+        it("E0042: Agregar items a la Navegacion del site con un titulo largo [BUG].", () => {
+       //Given usuario logueado
+        NavigationPage.goToSettings();
 
-        //When Crear nueva página
-        cy.get(CONTENT.newPageButton).click(); //Click on New Page
-        cy.location("hash").should("contain", "#/editor/page"); // check location
+        NavigationPage.goToEditNavigation();
 
-        //Then pone contenido
-        let title = faker.lorem.sentence();
-        let content = faker.lorem.paragraph();
-        PagesPage.addContentToPage(title, content);
-        cy.wait(500);
-        
-        cy.get('button.gh-editor-feature-image-add-button').first().as('fileInput');
-        cy.wait(500);
-        
-        cy.fixture('example.jpg').then(fileContent => {
-            cy.get('@fileInput').selectFile({
-                contents: fileContent.toString(),
-                fileName: 'example.jpg',
-                lastModified: Date.now(),
+        NavigationPage.getNavigationSection().within(() => {
+            cy.contains('Customize').click();
+        });
+
+        let navigationText = faker.lorem.sentence(10).replaceAll(' ', '-');
+
+        NavigationPage.getEditNavigationModal().within(() => {
+            cy.get('div[data-testid="new-navigation-item"]').within(() => {
+                cy.get('input').first().type(navigationText);
+                cy.get('input').eq(1).type('cypress');
+                cy.get('button[data-testid="add-button"]').click();
             });
+
+            cy.wait(500);
+            cy.get('button.cursor-pointer.bg-black.text-white').click(); // click save
         });
+
+
+        NavigationPage.goToSite();
         cy.wait(500);
+
+        cy.get('nav.gh-navigation-menu')
+            .should('contain', navigationText)
         
-        //Then publica la página
-        cy.get(CONTENT.publishPageButton).first().click(); // click en publicar
-
-        //And confirma creacion de la página 
-        PagesPage.clickConfirmCreatePage();
-        cy.wait(500);
-
-        // Then verifica que existe una Page creada
-        PagesPage.getPublishPageModal().within(() => {
-            PagesPage.getPageTitleInConfirmationModal()
-                .should('contain', title);
-        });
-
-        PagesPage.getPublishPageModal().within(() => {
-           cy.get('a[data-test-complete-bookmark]') 
-           .should('have.attr', 'target', '_blank')
-           .should('have.attr', 'href').then((href) => {
-               cy.visit(href);
-            });
-            
-        });
-        cy.wait(500);
-        
-        PagesPage.goToPages();
-
-        PagesPage.deletePageByTitle(title);
     });
+
 });
