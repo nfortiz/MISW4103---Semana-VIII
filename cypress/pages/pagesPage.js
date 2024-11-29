@@ -78,6 +78,10 @@ export class PagesPage {
     cy.get(CONTENT.pageContentInput).first().type(content);
   }
 
+  static getTextAreaForPageContent() {
+    return cy.get(CONTENT.pageContentInput).first();
+  }
+
   static clearPageTitle() {
     cy.get(CONTENT.pageTitleInput).first().clear();
   }
@@ -173,6 +177,30 @@ static getListPages() {
   
   static getListOfTagsAvailableForPage() {
     return cy.get('ul[role="listbox"]')
+  }
+
+  static getPageURLInput() {
+    return cy.get("input#url");
+  }
+
+  static getPageLabelForURL() {
+    return cy.get('label[for="url"]').first();
+  }
+
+  static getPageURLLink(){
+    return cy.get('a.post-view-link');
+  }
+
+  static getCloseCodeInjectionModal() {
+    return cy.get('button[data-test-button="close-psm-subview"]')
+  }
+
+  static getCodeInjectionButton() {
+    return cy.get('button[data-test-button="codeinjection"]')
+  }
+
+  static getCodeTextBox() {
+    return cy.get('pre[role="presentation"]')
   }
 
   static doRightClickPageItem(pageTitle) {
