@@ -94,4 +94,61 @@ export class PostPage {
         cy.get('p[data-koenig-dnd-droppable="true"]').first().clear();
         cy.get('[data-test-editor-title-input=""]').first().clear();
     }
+
+    static unpublishPost() {
+        return cy.get('[data-test-button="update-flow"]').first().click({ force: true });
+    }
+
+    static unpublishPostFinal() {
+        return cy.get('[data-test-button="revert-to-draft"]').first().click({ force: true });
+    }
+
+    static postAsDraft() {
+        return cy.get('span.draft').first().should('include.text', 'Draft');
+    }
+
+    static schedulePost() {
+        return cy.get('[data-test-nav-custom="posts-Scheduled"]').first().click({ force: true });
+    }
+
+    static menuPostSchedule() {
+        return cy.get('[data-test-psm-trigger=""]').first().click({ force: true });
+    }
+
+    static writeHour(hourAtras) {
+        //Hora de sistema
+        let actual = new Date();
+        actual.setHours(actual.getHours() - hourAtras);
+
+        //Mostrar la nueva hora
+        let hora = String(actual.getHours()).padStart(2, "0");
+        let minutos = String(actual.getMinutes()).padStart(2, "0");
+        let horaFinal = hora + ":" + minutos;
+        
+        return cy.get('.gh-date-time-picker-time ').first().clear().type(horaFinal);
+    }
+
+    static featurePost() {
+        return cy.get('[data-test-button="feature"]').first().click({ force: true });
+    }
+
+    static validateFeaturePost() {
+        return cy.get('.gh-featured-post').first().should('be.visible');
+    }
+
+    static clickChangeAccess() {
+        return cy.get('[data-test-button="change-access"]').first().click({ force: true });
+    }
+
+    static changeAccess() {
+        return cy.get('[data-test-select="post-visibility"]').select('Members only');
+    }
+
+    static saveChangeAccess() {
+        return cy.get('[data-test-button="confirm"]').first().click({ force: true });
+    }
+
+    static validateChangeAccess() {
+        return cy.get('[data-test-text="notification-content"]').first().should('be.visible');
+    }
 }
