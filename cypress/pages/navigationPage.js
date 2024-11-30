@@ -1,6 +1,6 @@
 import { LogIn } from "./logIn";
 
-export class MetadataPage {
+export class NavigationPage {
     static doLogIn() {
       cy.fixture("properties.json").then((data) => {
         cy.visit(data.baseURL); // Go to log In URL
@@ -16,14 +16,24 @@ export class MetadataPage {
         });
     }
 
-    static goToEditMetadata() {
+    static goToEditNavigation() {
         cy.fixture("properties.json").then((data) => {
-          cy.visit(data.adminBaseURL + "/#/settings/metadata"); 
+          cy.visit(data.adminBaseURL + "/#/settings/navigation"); 
         });
     }
 
-    static getMetadataSection() {
-        return cy.get('div[data-testid="metadata"]');
+    static goToSite() {
+        cy.fixture("properties.json").then((data) => {
+          cy.visit(data.siteURL + "/"); 
+        });
+    }
+
+    static getNavigationSection() {
+        return cy.get('div[data-testid="navigation"]');
+    }
+
+    static getEditNavigationModal() {
+        return cy.get('section[data-testid="navigation-modal"]')
     }
 
     static getSaveMetadataButton() {
