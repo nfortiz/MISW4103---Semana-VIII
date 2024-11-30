@@ -101,11 +101,13 @@ describe("Escenarios E0007 - E00010", function () {
     
     //And doy click en archive
     NewsLetters.clickArchive();
+    cy.wait(1000);
     cy.screenshot("ss");
 
     //When doy click en archive del modal
     NewsLetters.clickArchiveModal();
     cy.wait(1000);
+    cy.screenshot("ss");
 
     //Then veo mensaje de confirmacion
     NewsLetters.validateArchiveMessage();
@@ -153,6 +155,7 @@ describe("Escenarios E0007 - E00010", function () {
 
     //And doy click en archive del modal
     NewsLetters.clickArchiveModal();
+    cy.screenshot("ss");
     cy.wait(1000);
 
     //And doy click en re-activar
@@ -161,6 +164,7 @@ describe("Escenarios E0007 - E00010", function () {
 
     //When doy click en re-activar del modal
     NewsLetters.clickReactivateModal();
+    cy.screenshot("ss");
     cy.wait(1000);
 
     //Then veo mensaje de confirmacion
