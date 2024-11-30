@@ -26,15 +26,19 @@ export class IntegrationsPage {
   
     // Función para validar el título
     static validateTitle(expectedTitle) {
-      cy.get('[name=":r18:"]') // Usamos el ID escapado del campo Title
-        .should("have.value", expectedTitle);
+      cy.get('[data-testid="custom-integration-modal"]')
+      .find('input')
+      .eq(1) // Usamos el ID escapado del campo Title
+      .should("have.value", expectedTitle);
     }
   
     // Función para agregar una descripción
     static addDescription(description) {
-      cy.get('[name=":r1a:"]') // Usamos el ID escapado del campo Description
-        .click()
-        .type(description);
+      cy.get('[data-testid="custom-integration-modal"]')
+      .find('input')
+      .eq(2) // Usamos el ID escapado del campo Title
+      .click()
+      .type(description);
     }
   
     // Función para hacer clic en el botón "Save"
@@ -83,12 +87,8 @@ export class IntegrationsPage {
     // Función para eliminar el registro creado
     static deleteIntegration(title) {
       cy.get('[data-testid="integrations"]')
-        .contains(title.Trim())
-        .parent()
-        .parent()
-        .trigger("mouseover") // Simulamos el evento de pasar el ratón por encima
-        .find("button")
-        .contains("Delete")
+        .find('span')
+        .contains('Delete')
         .click({ force: true });
     }
     // Función para confirmar la eliminación de la integración

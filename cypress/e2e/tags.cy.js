@@ -1,7 +1,8 @@
 import { LogIn } from "../pages/logIn";
 import { TagPage } from "../pages/tagPage";
 import { PrincipalPage } from "../pages/principalPage";
-import { FakerGenerador } from "../fixtures/generateRandom";
+import { faker } from "@faker-js/faker";
+
 const data = require("../fixtures/properties.json");
 
 //Manejo de excepciones
@@ -50,7 +51,7 @@ describe("Escenarios E00017 - E00018", function () {
     TagPage.clickDescriptionTag();
 
     //And escribimos descripción del tag
-    let description = FakerGenerador.generateRandomData();
+    let description = faker.lorem.words();
     TagPage.writeDescriptionTag(description);
     cy.screenshot("ss");
 
@@ -80,7 +81,7 @@ describe("Escenarios E00017 - E00018", function () {
     cy.screenshot("ss");
 
     //And escriba el nombre del tag
-    let name = FakerGenerador.generateRandomData();
+    let name = faker.lorem.word();
     TagPage.writeNameTag(name);
     cy.screenshot("ss");
 
