@@ -14,8 +14,8 @@
 ### Clone del repositorio
 A través del comando git clone, se debe clonar el repositorio a un directorio local. 
 
-### Recomendaciones para la ejecución de las pruebas:**
-- **Condiciones iniciales para ejecutar pruebas en Ghost:** Las pruebas deben ejecutarse en la versión de Ghost 5.96 y se enfocan en las funcionalidades principales de la ABP (Posts, Pages, Tags, Members, Settings y Diseño de Ghost). Para evitar interferencias en los resultados, se recomienda que estas secciones estén vacías y sin contenido en drafts, ya que elementos existentes pueden afectar la ejecución correcta de las pruebas. Aplica para Cypress como a Kraken.
+### Recomendaciones para la ejecución de las pruebas:
+- **Condiciones iniciales para ejecutar pruebas en Ghost:** Las pruebas deben ejecutarse en la versión de Ghost 5.96 y se enfocan en las funcionalidades principales de la ABP (Posts, Pages, Tags, Members, Settings y Diseño de Ghost). Para evitar interferencias en los resultados, se recomienda que estas secciones estén vacías y sin contenido en drafts, ya que elementos existentes pueden afectar la ejecución correcta de las pruebas.
 
 - **Manejo de errores iniciales en Cypress:** Al ejecutar las pruebas por primera vez, Cypress  puede presentar errores inesperados, como problemas para cargar Ghost a tiempo. Si las dos primeras ejecuciones fallan, se recomienda reintentarlas, ya que en la mayoría de los casos, las pruebas logran completarse exitosamente después de estos dos intentos.
 
