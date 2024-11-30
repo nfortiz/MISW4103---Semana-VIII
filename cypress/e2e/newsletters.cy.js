@@ -14,8 +14,6 @@ Cypress.on("uncaught:exception", (err, runnable) => {
 });
 
 describe("Escenarios E0007 - E00010", function () {
-  let randomRow;
-
   beforeEach(() => {
     cy.fixture("properties.json").then((data) => {
       //Vistamos sitio de Ghost

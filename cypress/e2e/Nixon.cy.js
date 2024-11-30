@@ -13,7 +13,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.doLogIn();
     });
 
-    it("E0031: Editar URL de una Page con datos generados aleatorios.", () => {
+    it("E000028: Editar URL de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -50,7 +50,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0032: Agregar code injection al header de una Page con datos generados aleatorios.", () => {
+    it("E00029: Agregar code injection al header de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -89,7 +89,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0033: Agregar code injection al footer de una Page con datos generados aleatorios.", () => {
+    it("E00030: Agregar code injection al footer de una Page con datos generados aleatorios.", () => {
         //Given usuario logueado y pagina creada
         const title = "Page to be Edited";
         PagesPage.createPage(title, "Random content");
@@ -128,7 +128,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0034: Verificar que el shortcut CTRL + B (Negrita) esta siendo aplicado al agregar contenido a la Page.", () => {
+    it("E00031: Verificar que el shortcut CTRL + B (Negrita) esta siendo aplicado al agregar contenido a la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -171,7 +171,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0035: Verificar que el shortcut CTRL + I (Cursiva) esta siendo aplicado al agregar contenido a la Page.", () => {
+    it("E00032: Verificar que el shortcut CTRL + I (Cursiva) esta siendo aplicado al agregar contenido a la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -214,7 +214,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0036: Agregar Markdown al contenido de la Page.[BUG]", () => {
+    it("E00033: Agregar Markdown al contenido de la Page.[BUG]", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -270,7 +270,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0037: Agregar Botton con link a cypress al contenido de la Page.", () => {
+    it("E00034: Agregar Botton con link a cypress al contenido de la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -331,7 +331,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0038: Agregar Bookmark con link a cypress al contenido de la Page.", () => {
+    it("E00035: Agregar Bookmark con link a cypress al contenido de la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -384,7 +384,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0039: Agregar Youtube video con link a cypress al contenido de la Page.", () => {
+    it("E00036: Agregar Youtube video con link a cypress al contenido de la Page.", () => {
         //Given usuario logueado 
         PagesPage.goToPages();
 
@@ -437,7 +437,7 @@ describe('Feature: Pruebas semana 8', () => {
         PagesPage.deletePageByTitle(title);
     });
 
-    it("E0040: Agregar items a la Navegacion del site.", () => {
+    it("E00037: Agregar items a la Navegacion del site.", () => {
        //Given usuario logueado
         NavigationPage.goToSettings();
 
@@ -469,7 +469,7 @@ describe('Feature: Pruebas semana 8', () => {
         
     });
 
-    it("E0041: Eliminar items a la Navegacion del site.", () => {
+    it("E00038: Eliminar items a la Navegacion del site.", () => {
         //Given usuario logueado
          NavigationPage.goToSettings();
  
@@ -499,7 +499,7 @@ describe('Feature: Pruebas semana 8', () => {
          
     });  
 
-        it("E0042: Agregar items a la Navegacion del site con un titulo largo [BUG].", () => {
+        it("E00039: Agregar items a la Navegacion del site con un titulo largo [BUG].", () => {
        //Given usuario logueado
         NavigationPage.goToSettings();
 
